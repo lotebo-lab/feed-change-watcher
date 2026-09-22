@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Example Machines Blog</title>
+    <link>http://127.0.0.1:8099/</link>
+    <description>Release notes and status of the Example Machines product.</description>
+    <managingEditor>editor@example.com (The Editor)</managingEditor>
+    <item>
+      <title>Release 2.1 adds the CSV export button</title>
+      <link>http://127.0.0.1:8099/posts/release-2-1</link>
+      <guid isPermaLink="false">post-release-2-1</guid>
+      <pubDate>Fri, 19 Sep 2026 10:30:00 +0000</pubDate>
+      <description>The export button writes the same columns the table shows, including the date filter.</description>
+      <author>editor@example.com (The Editor)</author>
+    </item>
+    <item>
+      <title>Maintenance window on 25 September</title>
+      <link>http://127.0.0.1:8099/posts/maintenance-sept</link>
+      <guid isPermaLink="false">post-maintenance-sept</guid>
+      <pubDate>Wed, 17 Sep 2026 08:00:00 +0000</pubDate>
+      <description>The API will be read only for two hours starting at 02:00 UTC.</description>
+    </item>
+    <item>
+      <title>Price list of the plans was updated</title>
+      <link>http://127.0.0.1:8099/posts/price-list</link>
+      <guid isPermaLink="false">post-price-list</guid>
+      <pubDate>Mon, 15 Sep 2026 12:00:00 +0000</pubDate>
+      <description>The starter plan now includes 5 seats instead of 3.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,181 @@
+{
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "rowType": {
+                "type": "string",
+                "title": "Row type",
+                "description": "feed-item for a new item found in a feed, summary for the single run summary row that every successful run writes. Filter on this field to keep only the items.",
+                "enum": ["feed-item", "summary"],
+                "example": "feed-item"
+            },
+            "message": {
+                "type": "string",
+                "title": "Run summary",
+                "description": "Only on the summary row: how many feeds were checked and how many new items appeared, in one sentence.",
+                "example": "No new items: 3 of 3 feed(s) were read and every item they list had already been reported by an earlier run."
+            },
+            "runStartedAt": {
+                "type": "string",
+                "title": "Run started at",
+                "description": "Only on the summary row: when this run started, UTC.",
+                "example": "2026-09-20T18:00:00Z"
+            },
+            "finishedAt": {
+                "type": "string",
+                "title": "Finished at",
+                "description": "Only on the summary row: when this run finished, UTC.",
+                "example": "2026-09-20T18:00:07Z"
+            },
+            "sourcesGiven": {
+                "type": "integer",
+                "title": "Feeds given",
+                "description": "Only on the summary row: how many feed URLs this run was asked to watch.",
+                "example": 3
+            },
+            "sourcesRead": {
+                "type": "integer",
+                "title": "Feeds read",
+                "description": "Only on the summary row: how many of them answered and were parsed.",
+                "example": 3
+            },
+            "sourcesFailed": {
+                "type": "integer",
+                "title": "Feeds failed",
+                "description": "Only on the summary row: how many could not be read. The reason per feed is in the REPORT record.",
+                "example": 0
+            },
+            "sourcesSkipped": {
+                "type": "integer",
+                "title": "Feeds skipped",
+                "description": "Only on the summary row: how many were skipped because the run hit its charge limit.",
+                "example": 0
+            },
+            "sourcesSkippedByRobots": {
+                "type": "integer",
+                "title": "Feeds skipped by robots.txt",
+                "description": "Only on the summary row: how many feeds were not fetched because the host's robots.txt disallows this Actor's user agent. A robots.txt that cannot be read never blocks a feed.",
+                "example": 0
+            },
+            "newItems": {
+                "type": "integer",
+                "title": "New items",
+                "description": "Only on the summary row: how many items were new in this run. Zero is a valid, complete answer.",
+                "example": 0
+            },
+            "chargedEvents": {
+                "type": "integer",
+                "title": "Charged events",
+                "description": "Only on the summary row: how many pay-per-event units this run charged. The summary row itself is free.",
+                "example": 4
+            },
+            "chargeLimitReached": {
+                "type": "boolean",
+                "title": "Charge limit reached",
+                "description": "Only on the summary row: true when the run stopped early on its own charge limit.",
+                "example": false
+            },
+            "chargeFailures": {
+                "type": "integer",
+                "title": "Charge failures",
+                "description": "Only on the summary row: how many charge calls the platform did not answer. The run finishes anyway.",
+                "example": 0
+            },
+            "source_url": {
+                "type": "string",
+                "title": "Feed URL",
+                "description": "The feed this item came from, as given in the input.",
+                "example": "https://example.com/feed.xml"
+            },
+            "source_title": {
+                "type": "string",
+                "title": "Feed title",
+                "description": "Title the feed publishes for itself, empty when the feed has none.",
+                "example": "Example Blog"
+            },
+            "item_id": {
+                "type": "string",
+                "title": "Item id",
+                "description": "Identity of the item: the feed's guid or id, the link when there is none, or a hash of the feed URL, title and date. This is what the Actor remembers between runs.",
+                "example": "https://example.com/posts/2"
+            },
+            "item_title": {
+                "type": "string",
+                "title": "Item title",
+                "description": "Title of the item, as plain text.",
+                "example": "Release 2.1 is out"
+            },
+            "item_link": {
+                "type": "string",
+                "title": "Item link",
+                "description": "URL of the item on the publisher's site, empty when the feed gives none.",
+                "example": "https://example.com/posts/2"
+            },
+            "item_published_at": {
+                "type": "string",
+                "title": "Published at",
+                "description": "Publication date in UTC (YYYY-MM-DDTHH:MM:SSZ). When the date cannot be parsed, the feed's own text is kept.",
+                "example": "2026-09-19T10:30:00Z"
+            },
+            "item_summary": {
+                "type": "string",
+                "title": "Summary",
+                "description": "The short description the feed itself publishes, as plain text, cut at 600 characters. Never the full article body.",
+                "example": "The new release adds the export button and fixes the date filter."
+            }
+        }
+    },
+    "views": {
+        "overview": {
+            "title": "New items",
+            "transformation": {
+                "fields": [
+                    "rowType",
+                    "item_published_at",
+                    "source_title",
+                    "item_title",
+                    "item_link",
+                    "item_summary",
+                    "message"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "rowType": { "label": "Row", "format": "text" },
+                    "message": { "label": "Run summary", "format": "text" },
+                    "item_published_at": { "label": "Published", "format": "text" },
+                    "source_title": { "label": "Feed", "format": "text" },
+                    "item_title": { "label": "Title", "format": "text" },
+                    "item_link": { "label": "Link", "format": "link" },
+                    "item_summary": { "label": "Summary", "format": "text" }
+                }
+            }
+        },
+        "by_source": {
+            "title": "By source",
+            "transformation": {
+                "fields": [
+                    "rowType",
+                    "source_url",
+                    "source_title",
+                    "item_id",
+                    "item_title",
+                    "item_published_at"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "rowType": { "label": "Row", "format": "text" },
+                    "source_url": { "label": "Feed URL", "format": "link" },
+                    "source_title": { "label": "Feed", "format": "text" },
+                    "item_id": { "label": "Item id", "format": "text" },
+                    "item_title": { "label": "Title", "format": "text" },
+                    "item_published_at": { "label": "Published", "format": "text" }
+                }
+            }
+        }
+    }
+}

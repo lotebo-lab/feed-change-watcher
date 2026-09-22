@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Example Machines Status</title>
+  <link href="http://127.0.0.1:8099/status" rel="alternate"/>
+  <updated>2026-09-19T11:00:00Z</updated>
+  <entry>
+    <title>Elevated error rate on the reports endpoint</title>
+    <link href="http://127.0.0.1:8099/status/incident-482" rel="alternate"/>
+    <id>urn:status:incident-482</id>
+    <published>2026-09-18T14:05:00Z</published>
+    <summary>Between 13:40 and 14:05 UTC about 4% of report requests answered 500.</summary>
+    <author><name>On call engineer</name><email>oncall@example.com</email></author>
+  </entry>
+  <entry>
+    <title>Scheduled database upgrade finished</title>
+    <link href="http://127.0.0.1:8099/status/incident-479" rel="alternate"/>
+    <id>urn:status:incident-479</id>
+    <published>2026-09-16T03:20:00Z</published>
+    <summary>The upgrade finished 20 minutes ahead of the window with no downtime.</summary>
+  </entry>
+</feed>

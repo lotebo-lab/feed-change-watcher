@@ -1,0 +1,19 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Feed Change Watcher output",
+    "description": "One row per item that had not been returned in an earlier run, plus the report of this run.",
+    "properties": {
+        "newItems": {
+            "type": "string",
+            "title": "New items",
+            "description": "One item per feed entry seen for the first time: feed URL, feed title, item id, title, link, publication date and the summary the feed publishes.",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
+        },
+        "report": {
+            "type": "string",
+            "title": "Run report",
+            "description": "Feeds given, feeds read, feeds that failed, new items per source and how many events were charged.",
+            "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/REPORT"
+        }
+    }
+}

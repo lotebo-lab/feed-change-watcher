@@ -1,0 +1,30 @@
+{
+    "actorSpecification": 1,
+    "name": "feed-change-watcher",
+    "title": "RSS Feed Monitor: New Items Only",
+    "version": "0.1",
+    "description": "Give it a list of RSS or Atom feeds. Each run returns only the items that were not returned in an earlier run, one row per item, plus a report with the item count per source. It remembers what it already sent, so the second run is short.",
+    "buildTag": "latest",
+    "dockerfile": "../Dockerfile",
+    "input": "./input_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "output": "./output_schema.json",
+    "minMemoryMbytes": 256,
+    "defaultMemoryMbytes": 512,
+    "pay_per_event": {
+        "actorChargeEvents": {
+            "source-checked": {
+                "eventTitle": "Source checked",
+                "eventDescription": "One feed fetched, parsed and compared against the items already returned for it. Charged once per feed read; a feed that could not be fetched is not charged.",
+                "eventPriceUsd": 0.05
+            },
+            "change-report": {
+                "eventTitle": "Change report",
+                "eventDescription": "Charged once at the end of a run that found at least one new item, for the report listing new items per source, feeds read and feeds that failed. A run with nothing new does not pay this event.",
+                "eventPriceUsd": 0.5
+            }
+        }
+    }
+}

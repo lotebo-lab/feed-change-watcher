@@ -1,0 +1,17 @@
+# Apify local run data
+storage/
+apify_storage/
+crawlee_storage/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Node (Apify CLI)
+node_modules/
+.env
+*.pyc
+.git/
+logs/
+.claude/

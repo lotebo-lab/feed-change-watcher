@@ -1,0 +1,46 @@
+{
+    "title": "Feed Change Watcher input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "feedUrls": {
+            "title": "Feed URLs",
+            "type": "array",
+            "description": "The RSS or Atom feeds to watch, one URL per line. https:// is added when you leave it out. Each feed read is one charged event.",
+            "editor": "stringList",
+            "default": [],
+            "prefill": ["https://news.ycombinator.com/rss"]
+        },
+        "maxSources": {
+            "title": "Max feeds per run",
+            "type": "integer",
+            "description": "How many feeds from the list are read in this run. Feeds beyond this number are left for the next run.",
+            "editor": "number",
+            "default": 20,
+            "minimum": 1,
+            "maximum": 500,
+            "unit": "feeds"
+        },
+        "requestDelaySeconds": {
+            "title": "Delay between requests",
+            "type": "integer",
+            "description": "Seconds to wait between two feed requests. Keep it at 1 or more to stay polite with the servers you read.",
+            "editor": "number",
+            "default": 2,
+            "minimum": 0,
+            "maximum": 60,
+            "unit": "seconds"
+        },
+        "requestTimeoutSeconds": {
+            "title": "Request timeout",
+            "type": "integer",
+            "description": "Seconds to wait for a feed to answer before it is reported as failed in the run report.",
+            "editor": "number",
+            "default": 20,
+            "minimum": 3,
+            "maximum": 120,
+            "unit": "seconds"
+        }
+    },
+    "required": ["feedUrls"]
+}
