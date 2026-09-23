@@ -1,12 +1,28 @@
 # RSS Feed Monitor: New Items Only, From Changelog, Release and Status Feeds
-
+You follow a dozen changelog, release, status or supplier feeds and reread the same entries every week to work out which ones are new.
 **Run it on the Apify Store: https://apify.com/lotebo-lab/feed-change-watcher**
-
-You follow a dozen changelog, release, status or supplier feeds, and every week you reread the same entries to work out which ones are new. A reader shows you everything the feed carries; nothing tells you what appeared since you last looked.
 
 Give this Actor a list of RSS or Atom feed URLs and every run returns **only the new items** — the entries it has never handed you before, one row per item — because it remembers the item ids it already returned for each feed. The first run is the baseline; the run after that is usually a short list and sometimes an empty one.
 
 This repository holds the source code. The Actor runs on the Apify platform, so there is nothing to install and nothing to host.
+
+## Quick start
+
+1. Open https://apify.com/lotebo-lab/feed-change-watcher and switch the input to JSON.
+2. Paste this input, which is valid against [`.actor/input_schema.json`](.actor/input_schema.json), and start the run:
+
+```json
+{
+  "feedUrls": [
+    "https://news.ycombinator.com/rss"
+  ],
+  "maxSources": 20,
+  "requestDelaySeconds": 2,
+  "requestTimeoutSeconds": 20
+}
+```
+
+Price, as read from the public Apify Store API (`currentPricingInfo`) on 2026-09-23 16:25 UTC: US$ 0.05 per `source-checked` event (one feed read) plus US$ 0.50 per `change-report` event, only on a run that found at least one new item. Apify charges the platform usage of the run on top; that part is set by the platform, not by this Actor. The full table is under "Price".
 
 ## Use cases
 
@@ -131,7 +147,7 @@ The first run of the same pair returned five rows: everything the two feeds carr
 
 ## Price
 
-Pay per event, two events. These are the prices in force on the platform, so they are what a run of yours is charged:
+Pay per event, two events. These prices were read from the public Apify Store API (`currentPricingInfo`) on 2026-09-23 16:25 UTC, and they are what a run of yours is charged:
 
 | event | price | when it is charged |
 |---|---|---|
